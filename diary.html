@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ diary.title if diary else "New Diary" }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    {% if diary %}
+        <h1>{{ diary.title }}</h1>
+        <p>{{ diary.content }}</p>
+        <h3>Comments</h3>
+        <form method="POST">
+            <textarea name="comment" placeholder="Add your comment"></textarea>
+            <button type="submit">Submit Comment</button>
+        </form>
+        <div class="comments">
+            {% for comment in diary.comments %}
+            <div class="comment">{{ comment }}</div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <h1>Write Your Diary</h1>
+        <form method="POST">
+            <input type="text" name="title" placeholder="Title" required><br>
+            <textarea name="content" placeholder="Write your diary..." required></textarea><br>
+            <button type="submit">Save Diary</button>
+        </form>
+    {% endif %}
+</body>
+</html>

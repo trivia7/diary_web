@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diary Web</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>My Personal Diary</h1>
+    <a href="{{ url_for('new_diary') }}">Write a new diary</a>
+    <div class="diaries">
+        {% for diary in diaries %}
+        <div class="diary">
+            <h2>{{ diary.title }}</h2>
+            <p>{{ diary.content[:100] }}...</p>
+            <a href="{{ url_for('view_diary', diary_id=loop.index0) }}">Read more</a>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
